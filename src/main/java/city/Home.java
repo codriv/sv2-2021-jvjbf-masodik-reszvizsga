@@ -6,13 +6,17 @@ public class Home extends Building {
 
     public Home(int area, int levels, Address address) {
         super(area, levels, address);
-        if (levels > 3) {
-            throw new IllegalArgumentException("Maximum 3 levels!");
-        }
+        validateLevels(levels);
     }
 
     public Home(int area, Address address) {
         super(area, address);
+    }
+
+    private void validateLevels(int levels) {
+        if (levels > 3) {
+        throw new IllegalArgumentException("Maximum 3 levels!");
+        }
     }
 
     public int calculateNumberOfPeopleCanFit() {

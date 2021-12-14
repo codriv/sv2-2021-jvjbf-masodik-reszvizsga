@@ -9,9 +9,7 @@ public class Office extends Building{
         super(area, levels, address);
         this.company = company;
         this.numberOfTablesPerLevel = numberOfTablesPerLevel;
-        if (numberOfTablesPerLevel * 5 < area || area < numberOfTablesPerLevel * 2) {
-            throw new IllegalArgumentException("Number of tables per level is not correct!");
-        }
+        validateNumberOfTablesPerLevel(area);
     }
 
     public String getCompany() {
@@ -20,6 +18,12 @@ public class Office extends Building{
 
     public int getNumberOfTablesPerLevel() {
         return numberOfTablesPerLevel;
+    }
+
+    private void validateNumberOfTablesPerLevel(int area) {
+        if (numberOfTablesPerLevel * 5 < area || area < numberOfTablesPerLevel * 2) {
+            throw new IllegalArgumentException("Number of tables per level is not correct!");
+        }
     }
 
     public int calculateNumberOfPeopleCanFit() {

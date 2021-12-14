@@ -23,15 +23,15 @@ public class City {
     }
 
     public List<Building> getBuildings() {
-        return buildings;
+        return new ArrayList<>(buildings);
     }
 
     public void addBuilding(Building building) {
 //        if (building == null) {throw new IllegalArgumentException("parameter can't be null!");}
-        if ((building.getArea() + getAreaOfAllBuildings()) < fullArea) {
+        if ((building.getArea() + getAreaOfAllBuildings()) <= fullArea) {
             buildings.add(building);
         } else {
-            throw new IllegalArgumentException("City can't be larger than 500");
+            throw new IllegalArgumentException("City can't be larger than " + getFullArea());
         }
     }
 
@@ -44,6 +44,9 @@ public class City {
     }
 
     public Building findHighestBuilding() {
+        if (buildings.size() == 0) {
+            throw new IllegalArgumentException("There is no building in the city!");
+        }
         Building highestBuilding = buildings.get(0);
         for (Building building: buildings) {
             if (building.getLevels() > highestBuilding.getLevels()) {
@@ -65,7 +68,7 @@ public class City {
 
     public boolean isThereBuildingWithMorePeopleThan(int numberOfPeople) {
         for (Building building: buildings) {
-            if (building.calculateNumberOfPeopleCanFit() >= numberOfPeople) {
+            if (building.calculateNumberOfPeopleCanFit() > numberOfPeople) {
                 return true;
             }
         }

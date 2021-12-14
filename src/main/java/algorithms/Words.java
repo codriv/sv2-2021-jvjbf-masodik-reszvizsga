@@ -12,7 +12,7 @@ public class Words {
     }
 
     public void addWord(String word) {
-//        if (word == null) {throw new IllegalArgumentException("It should be valid word");}
+        if (word == null) {throw new IllegalArgumentException("It can not be null!");}
         if (word.contains(" ")) {
             throw new IllegalArgumentException("It should be one word!");
         }
@@ -22,10 +22,8 @@ public class Words {
         words.add(word);
     }
 
-    // hasUpperCase works only with english alphabet!!
-
     private boolean hasUpperCase(String word) {
-        for (Character character: word.toCharArray()) {
+        for (Character character : word.toCharArray()) {
             if (Character.isUpperCase(character)) {
                 return true;
             }
@@ -34,11 +32,18 @@ public class Words {
     }
 
     public boolean isThereAWordTwice() {
-        for (int i = 0; i < words.size() - 1; i++) {
-            for (int j = i + 1; j < words.size(); j++) {
-                if (words.get(i).equals(words.get(j))) {
-                    return true;
-                }
+        for (int i = 0; i < words.size(); i++) {
+            if (isEqualToNext(i)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private boolean isEqualToNext(int i) {
+        for (int j = i + 1; j < words.size(); j++) {
+            if (words.get(i).equals(words.get(j))) {
+                return true;
             }
         }
         return false;
